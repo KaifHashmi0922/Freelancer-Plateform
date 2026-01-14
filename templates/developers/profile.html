@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile - FreelanceHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-success" href="index.html"
+        ><i class="fa-solid fa-briefcase"></i> FreelanceHub</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="find-work.html">Find Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="browse-jobs.html">Browse Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link active" href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Profile Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <!-- Left Column -->
+        <div class="col-lg-4 mb-4">
+          <!-- Profile Card -->
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="https://via.placeholder.com/150" class="rounded-circle mb-3" width="150" height="150" alt="Profile" />
+              <h4 class="mb-1">Rahul Kumar</h4>
+              <p class="text-muted mb-2">Full Stack Django Developer</p>
+              <p class="small text-muted mb-3">
+                <i class="fas fa-map-marker-alt"></i> Mumbai, India
+              </p>
+              <div class="mb-3">
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star text-warning"></i>
+                <i class="fas fa-star-half-alt text-warning"></i>
+                <span class="ms-2">4.8 (32 reviews)</span>
+              </div>
+              <button class="btn btn-success w-100 mb-2">Edit Profile</button>
+              <button class="btn btn-outline-secondary w-100">View Public Profile</button>
+            </div>
+          </div>
+
+          <!-- Stats Card -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <h6 class="card-title mb-3">Profile Stats</h6>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Success Rate</span>
+                <strong>95%</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Completed Jobs</span>
+                <strong>24</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Total Earned</span>
+                <strong>$12,450</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Response Time</span>
+                <strong>2 hours</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Languages Card -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <h6 class="card-title mb-3">Languages</h6>
+              <div class="mb-2">
+                <strong>English</strong>
+                <span class="text-muted float-end">Fluent</span>
+              </div>
+              <div class="mb-2">
+                <strong>Hindi</strong>
+                <span class="text-muted float-end">Native</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certifications -->
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title mb-3">Certifications</h6>
+              <p class="small mb-2">
+                <i class="fas fa-certificate text-success"></i> Python Django Framework
+              </p>
+              <p class="small mb-2">
+                <i class="fas fa-certificate text-success"></i> PostgreSQL Database
+              </p>
+              <p class="small mb-0">
+                <i class="fas fa-certificate text-success"></i> AWS Certified Developer
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-lg-8">
+          <!-- About -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title mb-3">About Me</h5>
+              <p>
+                Experienced Full Stack Django Developer with over 3 years of expertise in building scalable web applications. Specialized in Django, Django REST Framework, PostgreSQL, and modern frontend technologies. Successfully delivered 24+ projects with a 95% client satisfaction rate.
+              </p>
+              <p>
+                I focus on writing clean, maintainable code and delivering projects on time. My expertise includes RESTful API development, database optimization, payment gateway integration, and building responsive user interfaces with Bootstrap.
+              </p>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title mb-0">Skills</h5>
+                <button class="btn btn-sm btn-outline-primary">Add Skill</button>
+              </div>
+              <span class="badge bg-primary me-2 mb-2">Django</span>
+              <span class="badge bg-primary me-2 mb-2">Python</span>
+              <span class="badge bg-primary me-2 mb-2">Django REST Framework</span>
+              <span class="badge bg-primary me-2 mb-2">PostgreSQL</span>
+              <span class="badge bg-primary me-2 mb-2">MySQL</span>
+              <span class="badge bg-primary me-2 mb-2">Bootstrap</span>
+              <span class="badge bg-primary me-2 mb-2">JavaScript</span>
+              <span class="badge bg-primary me-2 mb-2">HTML/CSS</span>
+              <span class="badge bg-primary me-2 mb-2">Git</span>
+              <span class="badge bg-primary me-2 mb-2">RESTful APIs</span>
+              <span class="badge bg-primary me-2 mb-2">FastAPI</span>
+              <span class="badge bg-primary me-2 mb-2">Redis</span>
+              <span class="badge bg-primary me-2 mb-2">Docker</span>
+            </div>
+          </div>
+
+          <!-- Portfolio -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title mb-0">Portfolio</h5>
+                <button class="btn btn-sm btn-outline-primary">Add Project</button>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="card border">
+                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Project" />
+                    <div class="card-body">
+                      <h6 class="card-title">Freelancer Marketplace</h6>
+                      <p class="card-text small">
+                        Full-stack freelance platform built with Django and Bootstrap featuring job posting, bidding, and payment integration.
+                      </p>
+                      <span class="badge bg-secondary me-1">Django</span>
+                      <span class="badge bg-secondary me-1">Bootstrap</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <div class="card border">
+                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Project" />
+                    <div class="card-body">
+                      <h6 class="card-title">Trolly Mate E-Commerce</h6>
+                      <p class="card-text small">
+                        Complete e-commerce platform with inventory management, order processing, and automated PDF invoice generation.
+                      </p>
+                      <span class="badge bg-secondary me-1">Django</span>
+                      <span class="badge bg-secondary me-1">PostgreSQL</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Work Experience -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title mb-0">Work Experience</h5>
+                <button class="btn btn-sm btn-outline-primary">Add Experience</button>
+              </div>
+
+              <div class="experience-item mb-4">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h6 class="mb-1">Django Backend Developer</h6>
+                    <p class="text-muted mb-2">Tech Solutions Inc.</p>
+                  </div>
+                  <small class="text-muted">Jan 2023 - Present</small>
+                </div>
+                <p class="small mb-0">
+                  Developed and maintained RESTful APIs for multiple client projects. Implemented database optimization strategies that improved query performance by 40%.
+                </p>
+              </div>
+
+              <div class="experience-item">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h6 class="mb-1">Full Stack Developer (Freelance)</h6>
+                    <p class="text-muted mb-2">Self-Employed</p>
+                  </div>
+                  <small class="text-muted">Jun 2022 - Dec 2022</small>
+                </div>
+                <p class="small mb-0">
+                  Built custom web applications for various clients using Django, PostgreSQL, and Bootstrap. Successfully completed 15+ projects with excellent client feedback.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title mb-0">Education</h5>
+                <button class="btn btn-sm btn-outline-primary">Add Education</button>
+              </div>
+              <div class="education-item">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h6 class="mb-1">Bachelor of Computer Applications (BCA)</h6>
+                    <p class="text-muted mb-2">Mumbai University</p>
+                  </div>
+                  <small class="text-muted">2020 - 2023</small>
+                </div>
+                <p class="small mb-0">
+                  Specialized in software development and database management. Graduated with First Class Honors.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reviews -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-4">Client Reviews (32)</h5>
+
+              <div class="review-item border-bottom pb-3 mb-3">
+                <div class="d-flex justify-content-between mb-2">
+                  <div>
+                    <strong>John Smith</strong>
+                    <div class="mt-1">
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                    </div>
+                  </div>
+                  <small class="text-muted">2 weeks ago</small>
+                </div>
+                <p class="mb-0">
+                  "Excellent work! Rahul delivered a high-quality Django application exactly as specified. Very professional and responsive throughout the project."
+                </p>
+              </div>
+
+              <div class="review-item border-bottom pb-3 mb-3">
+                <div class="d-flex justify-content-between mb-2">
+                  <div>
+                    <strong>Sarah Johnson</strong>
+                    <div class="mt-1">
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                    </div>
+                  </div>
+                  <small class="text-muted">1 month ago</small>
+                </div>
+                <p class="mb-0">
+                  "Great developer with strong Django and database skills. Completed the REST API project ahead of schedule with excellent documentation."
+                </p>
+              </div>
+
+              <div class="review-item">
+                <div class="d-flex justify-content-between mb-2">
+                  <div>
+                    <strong>Michael Brown</strong>
+                    <div class="mt-1">
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="far fa-star text-warning"></i>
+                    </div>
+                  </div>
+                  <small class="text-muted">2 months ago</small>
+                </div>
+                <p class="mb-0">
+                  "Very satisfied with the e-commerce platform. Good communication and problem-solving skills. Would hire again!"
+                </p>
+              </div>
+
+              <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary">Load More Reviews</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2025 FreelanceHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

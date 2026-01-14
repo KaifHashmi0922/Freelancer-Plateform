@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Notifications - FreelanceHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-success" href="index.html"
+        ><i class="fa-solid fa-briefcase"></i> FreelanceHub</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="browse-jobs.html">Browse Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="find-work.html">Find Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Notifications Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="mb-4">Notifications</h2>
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-start active">
+          <div>
+            <div class="fw-bold">New Proposal Received</div>
+            <small>You got a new proposal for "Django Full Stack Developer Needed".</small>
+          </div>
+          <span class="badge bg-primary rounded-pill">1h</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div>
+            <div class="fw-bold">Project Approved</div>
+            <small>Your client approved the milestone "Phase 1 Development".</small>
+          </div>
+          <span class="badge bg-secondary rounded-pill">2d</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div>
+            <div class="fw-bold">Message from John Smith</div>
+            <small>John sent you a message regarding your proposal.</small>
+          </div>
+          <span class="badge bg-secondary rounded-pill">4d</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2025 FreelanceHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

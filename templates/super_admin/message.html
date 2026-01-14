@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Messages - FreelanceHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-success" href="index.html"
+        ><i class="fa-solid fa-briefcase"></i> FreelanceHub</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="find-work.html">Find Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="browse-jobs.html">Browse Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Messages Section -->
+  <section class="py-4">
+    <div class="container">
+      <h2 class="mb-4">Messages</h2>
+
+      <div class="row">
+        <!-- Conversations List -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header bg-white">
+              <input type="text" class="form-control" placeholder="Search messages..." />
+            </div>
+            <div class="list-group list-group-flush" style="max-height: 600px; overflow-y: auto;">
+              <a href="#" class="list-group-item list-group-item-action active" onclick="loadConversation('john')">
+                <div class="d-flex">
+                  <img src="https://via.placeholder.com/50" class="rounded-circle me-3" width="50" height="50" alt="User" />
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between">
+                      <strong>John Smith</strong>
+                      <small class="text-muted">2h</small>
+                    </div>
+                    <p class="mb-0 small text-truncate">Can we schedule a call tomorrow?</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#" class="list-group-item list-group-item-action" onclick="loadConversation('sarah')">
+                <div class="d-flex">
+                  <img src="https://via.placeholder.com/50" class="rounded-circle me-3" width="50" height="50" alt="User" />
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between">
+                      <strong>Sarah Johnson</strong>
+                      <small class="text-muted">5h</small>
+                    </div>
+                    <p class="mb-0 small text-truncate">Project requirements updated</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#" class="list-group-item list-group-item-action" onclick="loadConversation('michael')">
+                <div class="d-flex">
+                  <img src="https://via.placeholder.com/50" class="rounded-circle me-3" width="50" height="50" alt="User" />
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between">
+                      <strong>Michael Brown</strong>
+                      <small class="text-muted">1d</small>
+                    </div>
+                    <p class="mb-0 small text-truncate">Thank you for your proposal</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#" class="list-group-item list-group-item-action" onclick="loadConversation('emma')">
+                <div class="d-flex">
+                  <img src="https://via.placeholder.com/50" class="rounded-circle me-3" width="50" height="50" alt="User" />
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between">
+                      <strong>Emma Wilson</strong>
+                      <small class="text-muted">2d</small>
+                    </div>
+                    <p class="mb-0 small text-truncate">When can you start the project?</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Window -->
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <img src="https://via.placeholder.com/40" class="rounded-circle me-2" width="40" height="40" alt="User" />
+                <div>
+                  <strong>John Smith</strong>
+                  <p class="mb-0 small text-muted">Active now</p>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-sm btn-outline-secondary me-2">
+                  <i class="fas fa-phone"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary">
+                  <i class="fas fa-ellipsis-v"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body" style="height: 450px; overflow-y: auto;" id="chatMessages">
+              <!-- Date Separator -->
+              <div class="text-center my-3">
+                <small class="text-muted">Today</small>
+              </div>
+
+              <!-- Received Message -->
+              <div class="d-flex mb-3">
+                <img
+                  src="https://via.placeholder.com/40"
+                  class="rounded-circle me-2"
+                  width="40"
+                  height="40"
+                  alt="User"
+                />
+                <div>
+                  <div class="bg-light rounded p-3" style="max-width: 400px;">
+                    <p class="mb-0">Hi Rahul! I reviewed your proposal for the e-commerce project. Your experience looks great!</p>
+                  </div>
+                  <small class="text-muted">10:30 AM</small>
+                </div>
+              </div>
+
+              <!-- Sent Message -->
+              <div class="d-flex mb-3 justify-content-end">
+                <div class="text-end">
+                  <div class="bg-success text-white rounded p-3" style="max-width: 400px;">
+                    <p class="mb-0">Thank you! I'm very excited about this opportunity. I have similar experience building e-commerce platforms.</p>
+                  </div>
+                  <small class="text-muted">10:32 AM</small>
+                </div>
+              </div>
+
+              <!-- Received Message -->
+              <div class="d-flex mb-3">
+                <img
+                  src="https://via.placeholder.com/40"
+                  class="rounded-circle me-2"
+                  width="40"
+                  height="40"
+                  alt="User"
+                />
+                <div>
+                  <div class="bg-light rounded p-3" style="max-width: 400px;">
+                    <p class="mb-0">That's great! Can we schedule a video call tomorrow to discuss the project requirements in detail?</p>
+                  </div>
+                  <small class="text-muted">10:35 AM</small>
+                </div>
+              </div>
+
+              <!-- Sent Message -->
+              <div class="d-flex mb-3 justify-content-end">
+                <div class="text-end">
+                  <div class="bg-success text-white rounded p-3" style="max-width: 400px;">
+                    <p class="mb-0">Absolutely! I'm available tomorrow between 10 AM - 4 PM IST. What time works best for you?</p>
+                  </div>
+                  <small class="text-muted">10:37 AM</small>
+                </div>
+              </div>
+
+              <!-- Received Message -->
+              <div class="d-flex mb-3">
+                <img
+                  src="https://via.placeholder.com/40"
+                  class="rounded-circle me-2"
+                  width="40"
+                  height="40"
+                  alt="User"
+                />
+                <div>
+                  <div class="bg-light rounded p-3" style="max-width: 400px;">
+                    <p class="mb-0">Perfect! Let's do 2 PM IST tomorrow. I'll send you a meeting link shortly.</p>
+                  </div>
+                  <small class="text-muted">12:15 PM</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer bg-white">
+              <form id="messageForm">
+                <div class="input-group">
+                  <button class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-paperclip"></i>
+                  </button>
+                  <input type="text" class="form-control" placeholder="Type a message..." id="messageInput" />
+                  <button class="btn btn-success" type="submit">
+                    <i class="fas fa-paper-plane"></i> Send
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2025 FreelanceHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
