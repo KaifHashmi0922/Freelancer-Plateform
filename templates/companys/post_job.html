@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job - FreelanceHub Pro</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0369a1;
+            --secondary-light: #0ea5e9;
+            --accent: #2563eb;
+            --accent-light: #60a5fa;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --info: #0891b2;
+            --dark: #0f172a;
+            --light: #f0f9ff;
+            --white: #ffffff;
+            --gray-100: #f8fafc;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --shadow: 0 25px 50px rgba(30, 64, 175, 0.15);
+            --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 40px 60px rgba(30, 64, 175, 0.2);
+            --glass: rgba(255, 255, 255, 0.25);
+            --glass-dark: rgba(255, 255, 255, 0.1);
+            --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--light) 0%, #e6f3ff 50%, var(--gray-100) 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Enhanced Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            33% { transform: scale(1.05) rotate(120deg); }
+            66% { transform: scale(1.02) rotate(240deg); }
+        }
+
+        /* ===== ENHANCED NAVBAR ===== */
+        .navbar {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.95) 0%, rgba(3, 105, 161, 0.95) 50%, rgba(37, 99, 235, 0.95) 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.9rem;
+            font-weight: 900;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .navbar-brand::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-light), var(--white));
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .navbar-brand:hover::before {
+            width: 100%;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-light), var(--white));
+            border-radius: 2px;
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::before {
+            width: 80%;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .main-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 3.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            color: var(--gray-600);
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ===== PROGRESS STEPS ===== */
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .step-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 28px;
+            right: -2.25rem;
+            width: 2.25rem;
+            height: 2px;
+            background: var(--gray-300);
+            transition: var(--transition);
+        }
+
+        .step-item.active::after,
+        .step-item.completed::after {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--gray-600);
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-item.active .step-number,
+        .step-item.completed .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.2);
+            transform: scale(1.1);
+        }
+
+        .step-item.completed .step-number::after {
+            content: '✓';
+            position: absolute;
+            font-size: 1.6rem;
+            font-weight: 900;
+        }
+
+        .step-label {
+            font-weight: 700;
+            color: var(--gray-600);
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .step-item.active .step-label,
+        .step-item.completed .step-label {
+            color: var(--primary);
+        }
+
+        /* ===== FORM CARD ===== */
+        .form-card {
+            background: var(--white);
+            border-radius: 32px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+            backdrop-filter: blur(20px);
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--success));
+            background-size: 300% 100%;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 3rem 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(180deg); }
+        }
+
+        .form-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-subtitle {
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            font-size: 1.15rem;
+        }
+
+        .form-body {
+            padding: 3.5rem;
+        }
+
+        /* ===== FORM FIELDS ===== */
+        .form-floating {
+            position: relative;
+            margin-bottom: 2.25rem;
+        }
+
+        .form-control, .form-select {
+            height: 72px;
+            padding: 1.75rem 1.5rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 24px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--light);
+            backdrop-filter: blur(10px);
+            width: 100%;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
+            background: var(--white);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .form-floating > label {
+            padding: 1.5rem 1.5rem 1rem;
+            color: var(--gray-600);
+            font-weight: 600;
+            transform-origin: 0 0;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
+
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label,
+        .form-floating > .form-select:focus ~ label,
+        .form-floating > .form-select:not([value=""]) ~ label {
+            transform: scale(0.85) translateY(-1.25rem) translateX(0.25rem);
+            color: var(--primary);
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        .skills-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .skills-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.875rem;
+            margin-top: 1.25rem;
+        }
+
+        .skill-tag {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            padding: 0.625rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-tag:hover,
+        .skill-tag.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+        }
+
+        .selected-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.875rem;
+            margin-top: 1.25rem;
+            min-height: 48px;
+        }
+
+        .selected-skill {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            padding: 0.625rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .remove-skill {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 900;
+        }
+
+        .remove-skill:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.2);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        /* ===== BUDGET CALCULATOR ===== */
+        .budget-calculator {
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.08), rgba(5, 150, 105, 0.03));
+            border: 2px solid rgba(5, 150, 105, 0.25);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .budget-calculator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--success), #10b981);
+        }
+
+        .budget-range {
+            height: 10px;
+            border-radius: 12px;
+            background: var(--gray-200);
+            outline: none;
+            margin: 1.5rem 0;
+            -webkit-appearance: none;
+            width: 100%;
+        }
+
+        .budget-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--success), #10b981);
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+            transition: var(--transition);
+        }
+
+        .budget-range::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .budget-preview {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--success), #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin: 1.25rem 0;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            padding: 1.5rem 3.5rem;
+            border: none;
+            border-radius: 24px;
+            font-size: 1.15rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            box-shadow: 0 12px 35px rgba(30, 64, 175, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(30, 64, 175, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 3px solid var(--primary-light);
+            font-weight: 700;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* ===== STEP NAVIGATION ===== */
+        .step-navigation {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* ===== VALIDATION ===== */
+        .invalid-feedback {
+            display: none;
+            color: var(--danger);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-top: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            background: rgba(220, 38, 38, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--danger);
+        }
+
+        .form-floating.is-invalid .invalid-feedback {
+            display: block;
+        }
+
+        .form-control.is-invalid,
+        .form-select.is-invalid {
+            border-color: var(--danger);
+            background: rgba(220, 38, 38, 0.05);
+        }
+
+        .form-control.is-invalid:focus,
+        .form-select.is-invalid:focus {
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15);
+        }
+
+        /* ===== TOAST NOTIFICATIONS ===== */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 9999;
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-lg);
+            transform: translateX(400px);
+            transition: var(--transition);
+            max-width: 400px;
+            font-weight: 600;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: rgba(5, 150, 105, 0.95);
+            color: var(--white);
+            border: 1px solid rgba(5, 150, 105, 0.3);
+        }
+
+        .toast.error {
+            background: rgba(220, 38, 38, 0.95);
+            color: var(--white);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .form-body {
+                padding: 2.5rem 2rem;
+            }
+
+            .progress-steps {
+                gap: 1.5rem;
+            }
+
+            .step-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .step-navigation {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Enhanced Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand">💼 FreelanceHub Pro</a>
+            <ul class="nav-links">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Find Talent</a></li>
+                <li><a href="#">My Jobs</a></li>
+                <li><a href="#">Messages</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">🚀 Post a Job</h1>
+            <p class="page-subtitle">
+                Attract top Django & Full-Stack developers from Gurugram and worldwide. 
+                Post your project and get proposals within hours.
+            </p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step-item active">
+                <div class="step-number">1</div>
+                <div class="step-label">Job Details</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-label">Skills & Budget</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-label">Review & Post</div>
+            </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="form-card">
+            <div class="form-header">
+                <h2 class="form-title">Project Requirements</h2>
+                <p class="form-subtitle">Fill in the details to attract perfect freelancers</p>
+            </div>
+
+            <div class="form-body">
+                <form id="postJobForm" novalidate>
+                    <!-- Job Title -->
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="jobTitle" name="title" placeholder="Job Title" required maxlength="100"/>
+                        <label for="jobTitle">🎯 Job Title</label>
+                        <div class="invalid-feedback">Enter a clear job title (max 100 chars)</div>
+                    </div>
+
+                    <!-- Job Description -->
+                    <div class="form-floating">
+                        <textarea class="form-control" id="jobDescription" name="description" placeholder="Describe your project..." rows="6" required minlength="100" style="height: 180px; resize: vertical;"></textarea>
+                        <label for="jobDescription">📝 Detailed Description</label>
+                        <div class="invalid-feedback">Describe your project (min 100 characters)</div>
+                    </div>
+
+                    <!-- Category & Experience -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div class="form-floating">
+                            <select class="form-select" id="jobCategory" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="web-development">Web Development</option>
+                                <option value="backend">Backend Development</option>
+                                <option value="fullstack">Full Stack</option>
+                                <option value="ecommerce">E-Commerce</option>
+                                <option value="saas">SaaS Applications</option>
+                                <option value="mobile">Mobile Apps</option>
+                            </select>
+                            <label for="jobCategory">🏷️ Category</label>
+                            <div class="invalid-feedback">Select project category</div>
+                        </div>
+                        <div class="form-floating">
+                            <select class="form-select" id="experienceLevel" name="experience" required>
+                                <option value="">Experience Level</option>
+                                <option value="entry">Entry Level (0-1 yr)</option>
+                                <option value="intermediate">Intermediate (1-3 yrs)</option>
+                                <option value="senior">Senior (3+ yrs)</option>
+                            </select>
+                            <label for="experienceLevel">⭐ Experience</label>
+                            <div class="invalid-feedback">Select experience level</div>
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="form-floating skills-section">
+                        <input type="text" class="form-control" id="skillsInput" placeholder="Type or click skills..." />
+                        <label for="skillsInput">🛠️ Required Skills</label>
+                        <div class="selected-skills" id="selectedSkills"></div>
+                        <div class="skills-suggestions">
+                            <span class="skill-tag" data-skill="Django">Django</span>
+                            <span class="skill-tag" data-skill="Python">Python</span>
+                            <span class="skill-tag" data-skill="PostgreSQL">PostgreSQL</span>
+                            <span class="skill-tag" data-skill="FastAPI">FastAPI</span>
+                            <span class="skill-tag" data-skill="React">React</span>
+                            <span class="skill-tag" data-skill="Docker">Docker</span>
+                            <span class="skill-tag" data-skill="Redis">Redis</span>
+                            <span class="skill-tag" data-skill="AWS">AWS</span>
+                            <span class="skill-tag" data-skill="Stripe">Stripe</span>
+                        </div>
+                        <div class="invalid-feedback">Add at least 3 relevant skills</div>
+                    </div>
+
+                    <!-- Budget Calculator -->
+                    <div class="budget-calculator">
+                        <label style="font-weight: 700; font-size: 1.1rem; color: var(--success);">💰 Project Budget</label>
+                        <input type="range" class="budget-range" id="budgetSlider" min="500" max="15000" value="3500" step="100">
+                        <div class="budget-preview" id="budgetPreview">$3,500</div>
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="jobBudget" name="budget" placeholder="Budget" required min="500" max="15000"/>
+                            <label for="jobBudget">Exact Budget (USD)</label>
+                            <div class="invalid-feedback">Budget must be $500 - $15,000</div>
+                        </div>
+                    </div>
+
+                    <!-- Duration & Date -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div class="form-floating">
+                            <select class="form-select" id="projectLength" name="duration" required>
+                                <option value="">Project Length</option>
+                                <option value="1week">Less than 1 week</option>
+                                <option value="2weeks">1-2 weeks</option>
+                                <option value="1month">1 month</option>
+                                <option value="3months">1-3 months</option>
+                                <option value="6months">3-6 months</option>
+                                <option value="ongoing">Ongoing (>6 months)</option>
+                            </select>
+                            <label for="projectLength">⏱️ Duration</label>
+                            <div class="invalid-feedback">Select project duration</div>
+                        </div>
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="deadline" name="deadline" required />
+                            <label for="deadline">📅 Start Date</label>
+                            <div class="invalid-feedback">Select preferred start date</div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="step-navigation">
+                        <button type="button" class="btn btn-secondary" id="prevBtn" style="width: auto; flex: 1;">
+                            ← Previous
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            🚀 Post Job Live
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form state management
+        let currentStep = 1;
+        let selectedSkills = [];
+        const minSkills = 3;
+
+        // DOM elements
+        const form = document.getElementById('postJobForm');
+        const skillsInput = document.getElementById('skillsInput');
+        const selectedSkillsContainer = document.getElementById('selectedSkills');
+        const budgetSlider = document.getElementById('budgetSlider');
+        const budgetPreview = document.getElementById('budgetPreview');
+        const budgetInput = document.getElementById('jobBudget');
+        const prevBtn = document.getElementById('prevBtn');
+        const stepItems = document.querySelectorAll('.step-item');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initSkills();
+            initBudgetCalculator();
+            setupValidation();
+            updateProgressSteps();
+            setMinDate();
+        });
+
+        // Skills functionality
+        function initSkills() {
+            document.querySelectorAll('.skill-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const skill = this.dataset.skill;
+                    addSkill(skill);
+                    this.classList.add('active');
+                });
+            });
+
+            skillsInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim()) {
+                    addSkill(this.value.trim());
+                    this.value = '';
+                }
+            });
+
+            skillsInput.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    addSkill(this.value.trim());
+                    this.value = '';
+                }
+            });
+        }
+
+        function addSkill(skill) {
+            if (selectedSkills.includes(skill) || selectedSkills.length >= 10) return;
+            
+            selectedSkills.push(skill);
+            renderSelectedSkills();
+            validateSkills();
+        }
+
+        function removeSkill(skill) {
+            selectedSkills = selectedSkills.filter(s => s !== skill);
+            renderSelectedSkills();
+            validateSkills();
+            
+            // Remove active state from suggestion
+            document.querySelectorAll('.skill-tag').forEach(tag => {
+                if (tag.dataset.skill === skill) tag.classList.remove('active');
+            });
+        }
+
+        function renderSelectedSkills() {
+            selectedSkillsContainer.innerHTML = selectedSkills.map(skill => `
+                <div class="selected-skill">
+                    ${skill}
+                    <span class="remove-skill" onclick="removeSkill('${skill.replace(/'/g, "\\'")}')">&times;</span>
+                </div>
+            `).join('');
+        }
+
+        // Budget calculator
+        function initBudgetCalculator() {
+            budgetSlider.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                budgetPreview.textContent = `$${value.toLocaleString()}`;
+                budgetInput.value = value;
+                validateBudget();
+            });
+
+            budgetInput.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                if (value >= 500 && value <= 15000) {
+                    budgetSlider.value = value;
+                    budgetPreview.textContent = `$${value.toLocaleString()}`;
+                    this.classList.remove('is-invalid');
+                } else {
+                    this.classList.add('is-invalid');
+                }
+            });
+        }
+
+        // Form validation
+        function setupValidation() {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                if (!validateForm()) {
+                    showToast('Please complete all required fields', 'error');
+                    return;
+                }
+
+                // Simulate API call
+                const submitBtn = document.querySelector('.btn-primary');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '⏳ Publishing Job...';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    showToast('🎉 Job posted successfully! Top freelancers will apply soon.', 'success');
+                    form.reset();
+                    selectedSkills = [];
+                    renderSelectedSkills();
+                    budgetSlider.value = 3500;
+                    budgetPreview.textContent = '$3,500';
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 3000);
+            });
+
+            // Real-time field validation
+            form.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
+                field.addEventListener('blur', function() {
+                    validateField(this);
+                });
+                field.addEventListener('input', function() {
+                    this.classList.remove('is-invalid');
+                });
+            });
+        }
+
+        function validateField(field) {
+            const floatingDiv = field.closest('.form-floating');
+            if (!field.validity.valid) {
+                field.classList.add('is-invalid');
+                floatingDiv.classList.add('is-invalid');
+            } else {
+                field.classList.remove('is-invalid');
+                floatingDiv.classList.remove('is-invalid');
+            }
+        }
+
+        function validateSkills() {
+            const skillsSection = skillsInput.closest('.form-floating');
+            if (selectedSkills.length < minSkills) {
+                skillsSection.classList.add('is-invalid');
+            } else {
+                skillsSection.classList.remove('is-invalid');
+            }
+        }
+
+        function validateBudget() {
+            if (budgetInput.value >= 500 && budgetInput.value <= 15000) {
+                budgetInput.classList.remove('is-invalid');
+            }
+        }
+
+        function validateForm() {
+            let isValid = true;
+            
+            form.querySelectorAll('[required]').forEach(field => {
+                if (!field.validity.valid) isValid = false;
+            });
+            
+            if (selectedSkills.length < minSkills) isValid = false;
+            if (budgetInput.value < 500 || budgetInput.value > 15000) isValid = false;
+            
+            return isValid;
+        }
+
+        // Progress steps
+        function updateProgressSteps() {
+            stepItems.forEach((step, index) => {
+                if (index + 1 < currentStep) {
+                    step.classList.add('completed');
+                    step.classList.remove('active');
+                } else if (index + 1 === currentStep) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            });
+        }
+
+        function setMinDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('deadline').min = today;
+        }
+
+        // Toast notifications
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <strong>${type === 'success' ? '✅ Success' : '❌ Error'}</strong>
+                <div style="margin-top: 0.5rem; font-size: 0.95rem;">${message}</div>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 100);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, 5000);
+        }
+
+        // Add CSS for toast animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInDown {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
