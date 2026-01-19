@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FreelanceHub Pro</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0369a1;
+            --secondary-light: #0ea5e9;
+            --accent: #2563eb;
+            --accent-light: #60a5fa;
+            --success: #059669;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --info: #0891b2;
+            --dark: #0f172a;
+            --light: #f0f9ff;
+            --white: #ffffff;
+            --gray-100: #f8fafc;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #475569;
+            --shadow: 0 25px 50px rgba(30, 64, 175, 0.15);
+            --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 40px 60px rgba(30, 64, 175, 0.2);
+            --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f8fafc 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: linear-gradient(135deg, #1e40af 0%, #0369a1 50%, #0891b2 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            animation: slideDownElastic 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes slideDownElastic {
+            from {
+                transform: translateY(-100%) scaleY(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scaleY(1);
+                opacity: 1;
+            }
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #e0f2fe;
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .btn:hover::before {
+            width: 250px;
+            height: 250px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #0369a1 0%, #0891b2 100%);
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(3, 105, 161, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(3, 105, 161, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ===== DASHBOARD HEADER ===== */
+        .dashboard-header {
+            background: linear-gradient(135deg, #1e40af 0%, #0369a1 50%, #0891b2 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2.5rem;
+            animation: slideUp 0.8s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .dashboard-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -30%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+
+        .header-info p {
+            opacity: 0.95;
+            font-size: 1.1rem;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .header-stat {
+            text-align: center;
+        }
+
+        .header-stat-value {
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .header-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* ===== STATS GRID ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .stat-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .stat-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .stat-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .stat-card:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(30, 64, 175, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-left-color: var(--secondary);
+        }
+
+        .stat-card:hover::before {
+            top: -25%;
+            right: -25%;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* ===== MAIN GRID ===== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2.5fr 1.5fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: start;
+        }
+
+        /* ===== CARD ===== */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            animation: slideInRight 0.6s ease forwards;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #1e40af 0%, #0369a1 100%);
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-header-action {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-header-action:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(3px);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* ===== PROJECT ITEM ===== */
+        .project-item {
+            padding: 1.5rem;
+            border-bottom: 2px solid var(--gray-200);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-item::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
+
+        .project-item:hover {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(3, 105, 161, 0.03) 100%);
+            padding-left: 2rem;
+        }
+
+        .project-item:hover::before {
+            left: 0;
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-title {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-client {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse-badge 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .status-in-progress {
+            background: rgba(30, 64, 175, 0.15);
+            color: var(--primary);
+            border: 1px solid var(--primary-light);
+        }
+
+        .status-completed {
+            background: rgba(5, 150, 105, 0.15);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .status-pending {
+            background: rgba(217, 119, 6, 0.15);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .status-on-hold {
+            background: rgba(220, 38, 38, 0.15);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item strong {
+            color: var(--dark);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+            animation: slideProgress 2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes slideProgress {
+            from {
+                width: 0;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* ===== SIDEBAR CARDS ===== */
+        .sidebar-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+            animation: slideInRight 0.6s ease forwards;
+        }
+
+        .sidebar-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .sidebar-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .sidebar-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #0369a1 0%, #0891b2 100%);
+            color: var(--white);
+            padding: 1.2rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .sidebar-content {
+            padding: 1.5rem;
+        }
+
+        .sidebar-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            transition: var(--transition);
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-item:hover {
+            background: var(--light);
+            border-left-color: var(--primary);
+            padding-left: 1.3rem;
+        }
+
+        .sidebar-item-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .sidebar-item-time {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* ===== JOB RECOMMENDATIONS ===== */
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .job-card {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--light) 0%, rgba(3, 105, 161, 0.03) 100%);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .job-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .job-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(30, 64, 175, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .job-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.2);
+        }
+
+        .job-card:hover::before {
+            top: -25%;
+            right: -25%;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .job-title-section {
+            flex: 1;
+        }
+
+        .job-company {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .job-title {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-description {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .job-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .job-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .job-level {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            background: rgba(30, 64, 175, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* ===== QUICK ACTIONS ===== */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .action-btn {
+            padding: 1rem;
+            text-align: center;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.2);
+        }
+
+        .action-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+        }
+
+        .action-btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary-light);
+        }
+
+        .action-btn-secondary:hover {
+            background: var(--primary-light);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* ===== ACTIVITY FEED ===== */
+        .activity-item {
+            padding: 1rem;
+            border-left: 3px solid transparent;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .activity-item:hover {
+            background: var(--light);
+            border-left-color: var(--primary);
+            padding-left: 1.3rem;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin-bottom: 0.3rem;
+        }
+
+        .activity-text {
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #111827 100%);
+            color: var(--white);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #60a5fa;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-light);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-stats {
+                justify-content: space-around;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .dashboard-header {
+                padding: 2rem 1rem;
+            }
+
+            .header-info h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .dashboard-grid {
+                gap: 1.5rem;
+            }
+
+            .job-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-meta {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .header-info h1 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-value {
+                font-size: 1.8rem;
+            }
+
+            .header-stats {
+                gap: 1rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .project-item {
+                padding: 1rem;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .job-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#home" class="navbar-brand">💼✨ FreelanceHub Pro</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#browse">Browse Jobs</a></li>
+                <li><a href="#dashboard" class="active">Dashboard</a></li>
+                <li><a href="#messages">Messages</a></li>
+                <li><a href="#earnings">Earnings</a></li>
+            </ul>
+            <div class="user-menu">
+                <span>Welcome, Developer! 👋</span>
+                <div class="user-avatar">DV</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- DASHBOARD HEADER -->
+    <div class="container">
+        <div class="dashboard-header">
+            <div class="header-content">
+                <div class="header-info">
+                    <h1>📊 Your Dashboard</h1>
+                    <p>Track projects, proposals, and earnings in real-time</p>
+                </div>
+                <div class="header-stats">
+                    <div class="header-stat">
+                        <div class="header-stat-value">4</div>
+                        <div class="header-stat-label">Active Projects</div>
+                    </div>
+                    <div class="header-stat">
+                        <div class="header-stat-value">12</div>
+                        <div class="header-stat-label">Open Proposals</div>
+                    </div>
+                    <div class="header-stat">
+                        <div class="header-stat-value">$15.2K</div>
+                        <div class="header-stat-label">This Month</div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-secondary">➕ Find Work</a>
+            </div>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-label">Total Clients</div>
+                <div class="stat-value">23</div>
+                <div class="stat-change">✨ 3 new clients</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📋</div>
+                <div class="stat-label">Active Proposals</div>
+                <div class="stat-value">12</div>
+                <div class="stat-change">⬆️ +4 this week</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-label">Completed Jobs</div>
+                <div class="stat-value">48</div>
+                <div class="stat-change">⭐ 4.8 rating</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-label">Total Earned</div>
+                <div class="stat-value">$15,240</div>
+                <div class="stat-change">📈 +8% vs last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏰</div>
+                <div class="stat-label">Hours Worked</div>
+                <div class="stat-value">240h</div>
+                <div class="stat-change">💪 On target</div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT GRID -->
+        <div class="dashboard-grid">
+            <!-- ACTIVE PROJECTS -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🚀 Active Projects</div>
+                    <a href="#" class="card-header-action">View All →</a>
+                </div>
+                <div class="card-body">
+                    <!-- Project 1 -->
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-info">
+                                <div class="project-title">Django E-Commerce Platform</div>
+                                <div class="project-client">Client: John Smith</div>
+                            </div>
+                            <span class="status-badge status-in-progress">In Progress</span>
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">💵 <strong>$2,500</strong></div>
+                            <div class="meta-item">⏰ Due: <strong>Nov 20</strong></div>
+                            <div class="meta-item">📊 <strong>75%</strong> Complete</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-info">
+                                <div class="project-title">REST API Development</div>
+                                <div class="project-client">Client: Sarah Johnson</div>
+                            </div>
+                            <span class="status-badge status-pending">Starting Soon</span>
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">💵 <strong>$1,800</strong></div>
+                            <div class="meta-item">⏰ Due: <strong>Dec 5</strong></div>
+                            <div class="meta-item">📊 <strong>20%</strong> Complete</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-info">
+                                <div class="project-title">Database Optimization</div>
+                                <div class="project-client">Client: Tech Solutions Inc.</div>
+                            </div>
+                            <span class="status-badge status-completed">Near Completion</span>
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">💵 <strong>$1,200</strong></div>
+                            <div class="meta-item">⏰ Due: <strong>Nov 15</strong></div>
+                            <div class="meta-item">📊 <strong>90%</strong> Complete</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-info">
+                                <div class="project-title">React Dashboard Redesign</div>
+                                <div class="project-client">Client: Digital Agency Pro</div>
+                            </div>
+                            <span class="status-badge status-on-hold">On Hold</span>
+                        </div>
+                        <div class="project-meta">
+                            <div class="meta-item">💵 <strong>$3,500</strong></div>
+                            <div class="meta-item">⏰ Due: <strong>Dec 10</strong></div>
+                            <div class="meta-item">📊 <strong>45%</strong> Complete</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDEBAR SECTION -->
+            <div>
+                <!-- RECENT PROPOSALS -->
+                <div class="sidebar-card">
+                    <div class="sidebar-header">📬 Recent Proposals (5)</div>
+                    <div class="sidebar-content">
+                        <div class="sidebar-item">
+                            <div style="font-weight: 600; color: var(--success); margin-bottom: 0.3rem;">✅ Accepted</div>
+                            <div class="sidebar-item-title">Django Project</div>
+                            <div class="sidebar-item-time">2 hours ago • $2,500</div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div style="font-weight: 600; color: var(--primary); margin-bottom: 0.3rem;">⏳ Pending</div>
+                            <div class="sidebar-item-title">Frontend Design</div>
+                            <div class="sidebar-item-time">1 day ago • $1,800</div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div style="font-weight: 600; color: var(--primary); margin-bottom: 0.3rem;">⏳ Pending</div>
+                            <div class="sidebar-item-title">API Development</div>
+                            <div class="sidebar-item-time">3 days ago • $3,200</div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div style="font-weight: 600; color: var(--warning); margin-bottom: 0.3rem;">⚠️ Rejected</div>
+                            <div class="sidebar-item-title">Data Science</div>
+                            <div class="sidebar-item-time">5 days ago • $2,000</div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div style="font-weight: 600; color: var(--success); margin-bottom: 0.3rem;">✅ Accepted</div>
+                            <div class="sidebar-item-title">Mobile App</div>
+                            <div class="sidebar-item-time">1 week ago • $4,500</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUICK ACTIONS -->
+                <div class="sidebar-card">
+                    <div class="sidebar-header">⚡ Quick Actions</div>
+                    <div class="sidebar-content">
+                        <div class="action-buttons">
+                            <a href="#" class="action-btn action-btn-primary">🔍 Find More Work</a>
+                            <a href="#" class="action-btn action-btn-secondary">👤 Update Profile</a>
+                            <a href="#" class="action-btn action-btn-secondary">💬 View Messages</a>
+                            <a href="#" class="action-btn action-btn-secondary">🎓 Add Skills</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UPCOMING DEADLINES -->
+                <div class="sidebar-card">
+                    <div class="sidebar-header">📅 Upcoming Deadlines</div>
+                    <div class="sidebar-content">
+                        <div class="activity-item">
+                            <div class="activity-time">2 days remaining</div>
+                            <div class="activity-text">Database Optimization</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-time">5 days remaining</div>
+                            <div class="activity-text">Django Platform</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-time">11 days remaining</div>
+                            <div class="activity-text">REST API Project</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RECOMMENDED JOBS SECTION -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">💼 Recommended Jobs For You</div>
+                <a href="#browse" class="card-header-action">Browse All →</a>
+            </div>
+            <div class="card-body">
+                <div class="job-grid">
+                    <!-- Job 1 -->
+                    <div class="job-card">
+                        <div class="job-header">
+                            <div class="job-title-section">
+                                <div class="job-company">TechStartup Inc.</div>
+                                <div class="job-title">Full Stack Developer</div>
+                            </div>
+                            <span class="status-badge status-in-progress">Urgent</span>
+                        </div>
+                        <p class="job-description">Build complete web application using Django & React with real-time features</p>
+                        <div class="job-footer">
+                            <div class="job-price">💵 $2,000 - $4,000</div>
+                            <div class="job-level">⭐ Expert</div>
+                        </div>
+                    </div>
+
+                    <!-- Job 2 -->
+                    <div class="job-card">
+                        <div class="job-header">
+                            <div class="job-title-section">
+                                <div class="job-company">DataCorp Solutions</div>
+                                <div class="job-title">Database Optimization</div>
+                            </div>
+                            <span class="status-badge status-completed">Fixed Price</span>
+                        </div>
+                        <p class="job-description">Optimize PostgreSQL queries for improved performance and scalability</p>
+                        <div class="job-footer">
+                            <div class="job-price">💵 $800 - $1,200</div>
+                            <div class="job-level">⭐ Intermediate</div>
+                        </div>
+                    </div>
+
+                    <!-- Job 3 -->
+                    <div class="job-card">
+                        <div class="job-header">
+                            <div class="job-title-section">
+                                <div class="job-company">Digital Agency Pro</div>
+                                <div class="job-title">API Integration</div>
+                            </div>
+                            <span class="status-badge status-pending">Hourly</span>
+                        </div>
+                        <p class="job-description">Integrate third-party payment and shipping APIs for e-commerce platform</p>
+                        <div class="job-footer">
+                            <div class="job-price">💵 $30 - $60/hr</div>
+                            <div class="job-level">⭐ Expert</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>FreelanceHub Pro</h4>
+                <p style="color: #d1d5db; line-height: 1.8; font-size: 0.9rem;">Your complete freelancing platform. Track projects, earn money, and grow your business with FreelanceHub Pro.</p>
+            </div>
+            <div class="footer-section">
+                <h4>For Freelancers</h4>
+                <ul>
+                    <li><a href="#browse-jobs">Browse Jobs</a></li>
+                    <li><a href="#my-profile">My Profile</a></li>
+                    <li><a href="#my-proposals">My Proposals</a></li>
+                    <li><a href="#earnings">Earnings</a></li>
+                    <li><a href="#skills">Skills Testing</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>For Clients</h4>
+                <ul>
+                    <li><a href="#post-job">Post Job</a></li>
+                    <li><a href="#find-talent">Find Talent</a></li>
+                    <li><a href="#portfolios">Browse Portfolios</a></li>
+                    <li><a href="#my-projects">My Projects</a></li>
+                    <li><a href="#team">Team Hiring</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#support">Support Center</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#trust">Trust & Safety</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FreelanceHub Pro. All rights reserved. | <a href="#privacy" style="color: #9ca3af;">Privacy Policy</a> | <a href="#terms" style="color: #9ca3af;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Smooth scroll for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Interactive project items
+        document.querySelectorAll('.project-item').forEach(item => {
+            item.addEventListener('mouseover', function() {
+                this.style.transform = 'translateX(5px)';
+            });
+            item.addEventListener('mouseout', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Interactive job cards
+        document.querySelectorAll('.job-card').forEach(card => {
+            card.addEventListener('click', function() {
+                console.log('Job card clicked');
+            });
+        });
+
+        // Action button interactions
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Action clicked:', this.textContent);
+            });
+        });
+
+        // Page load animation
+        window.addEventListener('load', function() {
+            document.querySelectorAll('[class*="fade-in"], [class*="slide"]').forEach((el, index) => {
+                el.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+    </script>
+</body>
+</html>
