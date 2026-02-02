@@ -1,0 +1,1238 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Jobs - FreelanceHub Pro</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0369a1;
+            --secondary-light: #0ea5e9;
+            --accent: #2563eb;
+            --accent-light: #60a5fa;
+            --success: #059669;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --info: #0891b2;
+            --dark: #0f172a;
+            --light: #f0f9ff;
+            --white: #ffffff;
+            --gray-100: #f8fafc;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #475569;
+            --shadow: 0 25px 50px rgba(30, 64, 175, 0.15);
+            --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 40px 60px rgba(30, 64, 175, 0.2);
+            --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f8fafc 100%);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: linear-gradient(135deg, #1e40af 0%, #0369a1 50%, #0891b2 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            animation: slideDownElastic 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes slideDownElastic {
+            from {
+                transform: translateY(-100%) scaleY(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scaleY(1);
+                opacity: 1;
+            }
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #e0f2fe;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .btn:hover::before {
+            width: 250px;
+            height: 250px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* ===== SECTION HEADER ===== */
+        .section-header {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(3, 105, 161, 0.05) 100%);
+            padding: 3rem 2rem;
+            border-bottom: 2px solid rgba(30, 64, 175, 0.1);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .sort-select {
+            padding: 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            background-color: var(--white);
+            color: var(--dark);
+            min-width: 200px;
+        }
+
+        .sort-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* ===== FILTER SIDEBAR ===== */
+        .filter-sidebar {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            animation: slideInLeft 0.6s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .filter-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .filter-group:last-child {
+            border-bottom: none;
+        }
+
+        .filter-label {
+            display: block;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(30, 64, 175, 0.05);
+            padding-left: 1rem;
+        }
+
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+            margin: 0;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-direction: column;
+            margin-top: 2rem;
+        }
+
+        .filter-buttons .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ===== JOB LISTINGS ===== */
+        .jobs-container {
+            animation: slideInRight 0.6s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .jobs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-200);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .jobs-count {
+            color: var(--gray-600);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .jobs-count span {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 900;
+        }
+
+        /* ===== JOB CARD ===== */
+        .job-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .job-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .job-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .job-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-left-color: var(--secondary);
+        }
+
+        .job-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(30, 64, 175, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .job-card:hover::after {
+            opacity: 1;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .job-card:hover .job-title {
+            color: var(--secondary);
+        }
+
+        .save-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--gray-300);
+        }
+
+        .save-btn:hover {
+            color: var(--danger);
+            transform: scale(1.2);
+        }
+
+        .save-btn.saved {
+            color: var(--danger);
+        }
+
+        .job-badges {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .badge-type {
+            background: linear-gradient(135deg, #1e40af 0%, #0369a1 100%);
+            color: var(--white);
+        }
+
+        .badge-level {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: var(--white);
+        }
+
+        .badge-budget {
+            background: linear-gradient(135deg, #d97706 0%, #ca8a04 100%);
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .job-description {
+            color: var(--gray-600);
+            margin: 1.2rem 0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .job-skills {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .skill-tag {
+            background: rgba(30, 64, 175, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(30, 64, 175, 0.2);
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--gray-200);
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .meta-item strong {
+            color: var(--dark);
+        }
+
+        .job-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-view {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .proposal-count {
+            background: rgba(30, 64, 175, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #111827 100%);
+            color: var(--white);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #60a5fa;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-light);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-sidebar {
+                position: relative;
+                top: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .section-header {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .main-container {
+                padding: 1rem;
+                grid-template-columns: 1fr;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .search-input,
+            .sort-select {
+                width: 100%;
+                min-width: unset;
+            }
+
+            .job-header {
+                flex-direction: column;
+            }
+
+            .job-meta {
+                gap: 1rem;
+            }
+
+            .job-actions {
+                flex-direction: column;
+            }
+
+            .btn-view {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-brand {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .job-card {
+                padding: 1.5rem;
+            }
+
+            .job-title {
+                font-size: 1.1rem;
+            }
+
+            .job-badges {
+                gap: 0.4rem;
+            }
+
+            .badge {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.7rem;
+            }
+
+            .job-skills {
+                gap: 0.3rem;
+            }
+
+            .skill-tag {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .job-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand">💼 FreelanceHub Pro</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#browse" class="active">Browse Jobs</a></li>
+                <li><a href="#find-talent">Find Talent</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="#login" class="btn btn-outline btn-sm">Login</a>
+                <a href="#signup" class="btn btn-primary btn-sm">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION HEADER WITH SEARCH -->
+    <section class="section-header">
+        <div class="navbar-container">
+            <h1 class="section-title">🔍 Find Amazing Jobs</h1>
+            
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="Search by job title, skills, or keywords..." 
+                    id="searchInput"
+                >
+                <select class="sort-select" id="sortBy" onchange="sortJobs(this.value)">
+                    <option value="newest">Newest First</option>
+                    <option value="budget-high">Highest Budget</option>
+                    <option value="budget-low">Lowest Budget</option>
+                    <option value="proposals">Most Proposals</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-container">
+        <!-- SIDEBAR FILTERS -->
+        <aside class="filter-sidebar">
+            <div class="filter-title">🎯 Refine Search</div>
+            
+            <!-- Category Filter -->
+            <div class="filter-group">
+                <label class="filter-label">Category</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="catWeb" checked>
+                        <label for="catWeb">Web Development</label>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="catMobile">
+                        <label for="catMobile">Mobile Development</label>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="catDesign">
+                        <label for="catDesign">Design & UI/UX</label>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="catData">
+                        <label for="catData">Data Science</label>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="catWriting">
+                        <label for="catWriting">Writing & Content</label>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Experience Level -->
+            <div class="filter-group">
+                <label class="filter-label">Experience Level</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="expEntry">
+                        <label for="expEntry">Entry Level</label>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="expInter" checked>
+                        <label for="expInter">Intermediate</label>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="expExpert">
+                        <label for="expExpert">Expert</label>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Budget Filter -->
+            <div class="filter-group">
+                <label class="filter-label">Budget</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="radio" name="budget" id="budgetAny" checked>
+                        <label for="budgetAny">Any Budget</label>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="radio" name="budget" id="budget500">
+                        <label for="budget500">Less than $500</label>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="radio" name="budget" id="budget500to1k">
+                        <label for="budget500to1k">$500 - $1,000</label>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="radio" name="budget" id="budget1k">
+                        <label for="budget1k">$1,000 - $5,000</label>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="radio" name="budget" id="budget5k">
+                        <label for="budget5k">$5,000+</label>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="filter-buttons">
+                <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                <button class="btn btn-outline" onclick="clearFilters()">Clear All</button>
+            </div>
+        </aside>
+
+        <!-- JOBS LISTING -->
+        <div class="jobs-container">
+            <div class="jobs-header">
+                <div class="jobs-count">Showing <span id="jobCount">237</span> jobs</div>
+            </div>
+
+            <!-- Job Card 1 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <a href="#job-details" class="job-title">Django Full Stack Developer Needed</a>
+                        <div class="job-badges">
+                            <span class="badge badge-type">💰 Fixed Price</span>
+                            <span class="badge badge-level">📊 Expert</span>
+                            <span class="badge badge-budget">$1,500 - $3,000</span>
+                        </div>
+                    </div>
+                    <button class="save-btn" onclick="toggleSave(this)">♡</button>
+                </div>
+                <p class="job-description">
+                    Looking for an experienced Django developer to build a complete freelance marketplace platform. Must have experience with Django REST Framework, PostgreSQL, and modern frontend integration. Project includes user authentication, payment gateway, and real-time messaging.
+                </p>
+                <div class="job-skills">
+                    <span class="skill-tag">Django</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">REST API</span>
+                    <span class="skill-tag">Frontend</span>
+                </div>
+                <div class="job-meta">
+                    <div class="meta-item">📍 <strong>United States</strong></div>
+                    <div class="meta-item">⏰ Posted <strong>2 hours ago</strong></div>
+                    <div class="meta-item">📝 Deadline: <strong>4 weeks</strong></div>
+                </div>
+                <div class="job-actions">
+                    <button class="btn btn-primary btn-view" onclick="window.location.href='#job-details'">📋 View Details & Bid</button>
+                    <div class="proposal-count">15 Proposals</div>
+                </div>
+            </div>
+
+            <!-- Job Card 2 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <a href="#job-details" class="job-title">React Dashboard & Admin Panel</a>
+                        <div class="job-badges">
+                            <span class="badge badge-type">⏱️ Hourly</span>
+                            <span class="badge badge-level">📊 Expert</span>
+                            <span class="badge badge-budget">$40-60/hr</span>
+                        </div>
+                    </div>
+                    <button class="save-btn" onclick="toggleSave(this)">♡</button>
+                </div>
+                <p class="job-description">
+                    Build a sophisticated React dashboard with real-time data visualization, interactive charts, and responsive design. Must support dark/light themes, real-time updates using WebSockets, and complex filtering mechanisms.
+                </p>
+                <div class="job-skills">
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Chart.js</span>
+                    <span class="skill-tag">UI/UX</span>
+                    <span class="skill-tag">Responsive Design</span>
+                </div>
+                <div class="job-meta">
+                    <div class="meta-item">🌍 <strong>Remote</strong></div>
+                    <div class="meta-item">⏰ Posted <strong>5 hours ago</strong></div>
+                    <div class="meta-item">📝 Duration: <strong>8 weeks</strong></div>
+                </div>
+                <div class="job-actions">
+                    <button class="btn btn-primary btn-view" onclick="window.location.href='#job-details'">📋 View Details & Bid</button>
+                    <div class="proposal-count">28 Proposals</div>
+                </div>
+            </div>
+
+            <!-- Job Card 3 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <a href="#job-details" class="job-title">Flutter E-Commerce Mobile App</a>
+                        <div class="job-badges">
+                            <span class="badge badge-type">💰 Fixed Price</span>
+                            <span class="badge badge-level">📊 Expert</span>
+                            <span class="badge badge-budget">$5,000 - $8,000</span>
+                        </div>
+                    </div>
+                    <button class="save-btn" onclick="toggleSave(this)">♡</button>
+                </div>
+                <p class="job-description">
+                    Develop a complete e-commerce mobile application using Flutter. Features include product catalog, shopping cart, secure payment integration, order tracking, push notifications, and offline support. Must follow Material Design guidelines.
+                </p>
+                <div class="job-skills">
+                    <span class="skill-tag">Flutter</span>
+                    <span class="skill-tag">Dart</span>
+                    <span class="skill-tag">Firebase</span>
+                    <span class="skill-tag">Payment API</span>
+                    <span class="skill-tag">Mobile Dev</span>
+                </div>
+                <div class="job-meta">
+                    <div class="meta-item">📍 <strong>India</strong></div>
+                    <div class="meta-item">⏰ Posted <strong>1 day ago</strong></div>
+                    <div class="meta-item">📝 Duration: <strong>12 weeks</strong></div>
+                </div>
+                <div class="job-actions">
+                    <button class="btn btn-primary btn-view" onclick="window.location.href='#job-details'">📋 View Details & Bid</button>
+                    <div class="proposal-count">42 Proposals</div>
+                </div>
+            </div>
+
+            <!-- Job Card 4 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <a href="#job-details" class="job-title">Full-Stack Web Application</a>
+                        <div class="job-badges">
+                            <span class="badge badge-type">💰 Fixed Price</span>
+                            <span class="badge badge-level">📊 Intermediate</span>
+                            <span class="badge badge-budget">$3,000 - $6,000</span>
+                        </div>
+                    </div>
+                    <button class="save-btn" onclick="toggleSave(this)">♡</button>
+                </div>
+                <p class="job-description">
+                    Build a comprehensive web application with Django backend and React frontend. Include user authentication, role-based access, email notifications, document upload, and comprehensive admin dashboard with analytics.
+                </p>
+                <div class="job-skills">
+                    <span class="skill-tag">Django</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">Full-Stack</span>
+                    <span class="skill-tag">API Design</span>
+                </div>
+                <div class="job-meta">
+                    <div class="meta-item">🌍 <strong>Remote</strong></div>
+                    <div class="meta-item">⏰ Posted <strong>3 days ago</strong></div>
+                    <div class="meta-item">📝 Duration: <strong>10 weeks</strong></div>
+                </div>
+                <div class="job-actions">
+                    <button class="btn btn-primary btn-view" onclick="window.location.href='#job-details'">📋 View Details & Bid</button>
+                    <div class="proposal-count">19 Proposals</div>
+                </div>
+            </div>
+
+            <!-- Job Card 5 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <a href="#job-details" class="job-title">UI/UX Design - SaaS Platform</a>
+                        <div class="job-badges">
+                            <span class="badge badge-type">⏱️ Hourly</span>
+                            <span class="badge badge-level">📊 Expert</span>
+                            <span class="badge badge-budget">$50-80/hr</span>
+                        </div>
+                    </div>
+                    <button class="save-btn" onclick="toggleSave(this)">♡</button>
+                </div>
+                <p class="job-description">
+                    Design modern interfaces for a SaaS platform targeting enterprise clients. Deliverables include wireframes, prototypes in Figma, design system documentation, and user testing insights. Must ensure accessibility standards.
+                </p>
+                <div class="job-skills">
+                    <span class="skill-tag">Figma</span>
+                    <span class="skill-tag">UI Design</span>
+                    <span class="skill-tag">UX Research</span>
+                    <span class="skill-tag">Prototyping</span>
+                    <span class="skill-tag">Design System</span>
+                </div>
+                <div class="job-meta">
+                    <div class="meta-item">🌍 <strong>Remote</strong></div>
+                    <div class="meta-item">⏰ Posted <strong>6 hours ago</strong></div>
+                    <div class="meta-item">📝 Duration: <strong>6 weeks</strong></div>
+                </div>
+                <div class="job-actions">
+                    <button class="btn btn-primary btn-view" onclick="window.location.href='#job-details'">📋 View Details & Bid</button>
+                    <div class="proposal-count">31 Proposals</div>
+                </div>
+            </div>
+
+            <!-- Job Card 6 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <a href="#job-details" class="job-title">Machine Learning - Predictive Analytics</a>
+                        <div class="job-badges">
+                            <span class="badge badge-type">💰 Fixed Price</span>
+                            <span class="badge badge-level">📊 Expert</span>
+                            <span class="badge badge-budget">$4,000 - $7,000</span>
+                        </div>
+                    </div>
+                    <button class="save-btn" onclick="toggleSave(this)">♡</button>
+                </div>
+                <p class="job-description">
+                    Build a predictive analytics model for customer churn prediction. Using Python, scikit-learn, and pandas to analyze large datasets. Must include data preprocessing, model validation, performance metrics, and comprehensive documentation.
+                </p>
+                <div class="job-skills">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Machine Learning</span>
+                    <span class="skill-tag">Scikit-learn</span>
+                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">Analytics</span>
+                </div>
+                <div class="job-meta">
+                    <div class="meta-item">📍 <strong>United States</strong></div>
+                    <div class="meta-item">⏰ Posted <strong>12 hours ago</strong></div>
+                    <div class="meta-item">📝 Duration: <strong>8 weeks</strong></div>
+                </div>
+                <div class="job-actions">
+                    <button class="btn btn-primary btn-view" onclick="window.location.href='#job-details'">📋 View Details & Bid</button>
+                    <div class="proposal-count">11 Proposals</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>FreelanceHub Pro</h4>
+                <p style="color: #d1d5db; line-height: 1.8; font-size: 0.9rem;">Connecting talented freelancers with amazing opportunities worldwide. Build your freelance career with us.</p>
+            </div>
+            <div class="footer-section">
+                <h4>For Freelancers</h4>
+                <ul>
+                    <li><a href="#browse-jobs">Browse Jobs</a></li>
+                    <li><a href="#my-profile">My Profile</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#earnings">Earnings</a></li>
+                    <li><a href="#proposals">My Proposals</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>For Clients</h4>
+                <ul>
+                    <li><a href="#post-job">Post Job</a></li>
+                    <li><a href="#find-talent">Find Talent</a></li>
+                    <li><a href="#browse-portfolios">Browse Portfolios</a></li>
+                    <li><a href="#my-projects">My Projects</a></li>
+                    <li><a href="#team">Team Hiring</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#support">Support Center</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#trust">Trust & Safety</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FreelanceHub Pro. All rights reserved. | <a href="#privacy" style="color: #9ca3af;">Privacy Policy</a> | <a href="#terms" style="color: #9ca3af;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Toggle save job
+        function toggleSave(btn) {
+            btn.classList.toggle('saved');
+            btn.textContent = btn.classList.contains('saved') ? '❤' : '♡';
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            console.log('Search:', this.value);
+            // Add search filtering logic here
+        });
+
+        // Sort jobs
+        function sortJobs(value) {
+            console.log('Sorting by:', value);
+            // Add sorting logic here
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const btn = event.target;
+            btn.textContent = '✓ Filters Applied';
+            btn.style.background = 'linear-gradient(135deg, #059669 0%, #047857 100%)';
+            setTimeout(() => {
+                btn.textContent = 'Apply Filters';
+                btn.style.background = '';
+            }, 2000);
+        }
+
+        // Clear filters
+        function clearFilters() {
+            document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+                input.checked = false;
+            });
+            document.getElementById('budgetAny').checked = true;
+            document.getElementById('catWeb').checked = true;
+            document.getElementById('expInter').checked = true;
+        }
+
+        // Smooth scroll for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add animation on page load
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.job-card').forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+    </script>
+</body>
+</html>

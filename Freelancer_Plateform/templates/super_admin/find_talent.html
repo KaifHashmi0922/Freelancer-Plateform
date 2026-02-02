@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - FreelanceHub Pro</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0369a1;
+            --secondary-light: #0ea5e9;
+            --accent: #2563eb;
+            --accent-light: #60a5fa;
+            --success: #059669;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --info: #0891b2;
+            --dark: #0f172a;
+            --light: #f0f9ff;
+            --white: #ffffff;
+            --gray-100: #f8fafc;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #475569;
+            --shadow: 0 25px 50px rgba(30, 64, 175, 0.15);
+            --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 40px 60px rgba(30, 64, 175, 0.2);
+            --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f8fafc 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: linear-gradient(135deg, #1e40af 0%, #0369a1 50%, #0891b2 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            animation: slideDownElastic 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes slideDownElastic {
+            from {
+                transform: translateY(-100%) scaleY(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scaleY(1);
+                opacity: 1;
+            }
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ===== PROFILE HEADER ===== */
+        .profile-header {
+            background: linear-gradient(135deg, #1e40af 0%, #0369a1 50%, #0891b2 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2.5rem;
+            animation: slideUp 0.8s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -30%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .profile-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .profile-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .profile-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .profile-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 1.1rem;
+        }
+
+        .rating-text {
+            opacity: 0.95;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.85rem 1.8rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .btn:hover::before {
+            width: 250px;
+            height: 250px;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: #1e40af;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* ===== TABS ===== */
+        .tabs-container {
+            margin-bottom: 2.5rem;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            border-bottom: 3px solid var(--gray-200);
+            padding-bottom: 1rem;
+        }
+
+        .tab {
+            padding: 1rem 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--gray-600);
+            transition: var(--transition);
+            position: relative;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tab:hover {
+            color: var(--primary);
+        }
+
+        .tab.active {
+            color: var(--primary);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1.5rem;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 800;
+        }
+
+        .card p {
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== GRID LAYOUTS ===== */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        /* ===== SKILL BADGES ===== */
+        .skill-badge {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-right: 0.8rem;
+            margin-bottom: 0.8rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.2);
+            cursor: pointer;
+        }
+
+        .skill-badge:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+        }
+
+        /* ===== INFO BOXES ===== */
+        .info-box {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--light) 0%, rgba(3, 105, 161, 0.05) 100%);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .info-box:hover {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(3, 105, 161, 0.15) 100%);
+            transform: translateX(5px);
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+
+        .info-value {
+            font-size: 1.3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== PORTFOLIO ITEMS ===== */
+        .portfolio-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover::before {
+            left: 0;
+        }
+
+        .portfolio-item:hover {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: translateY(-8px);
+            border-color: var(--primary);
+        }
+
+        .portfolio-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .portfolio-desc {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .portfolio-tech {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .tech-tag:hover {
+            transform: scale(1.05);
+        }
+
+        /* ===== EXPERIENCE ITEMS ===== */
+        .experience-item {
+            padding: 1.5rem;
+            border-bottom: 2px solid var(--gray-200);
+            position: relative;
+            padding-left: 2.5rem;
+            transition: var(--transition);
+        }
+
+        .experience-item:hover {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, transparent 100%);
+            padding-left: 3rem;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1.8rem;
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+
+        .experience-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .experience-company {
+            color: var(--primary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .experience-date {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .experience-desc {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            margin-top: 0.8rem;
+            line-height: 1.6;
+        }
+
+        /* ===== REVIEW ITEMS ===== */
+        .review-item {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--light) 0%, rgba(3, 105, 161, 0.05) 100%);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--success);
+        }
+
+        .review-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.05rem;
+        }
+
+        .review-rating {
+            color: #fbbf24;
+            font-size: 1rem;
+            letter-spacing: 0.2rem;
+        }
+
+        .review-text {
+            color: var(--gray-600);
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .review-meta {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* ===== TAB CONTENT ===== */
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #111827 100%);
+            color: var(--white);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            color: #60a5fa;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-light);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-avatar {
+                margin: 0 auto;
+            }
+
+            .profile-meta {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .profile-header {
+                padding: 2rem 1rem;
+                gap: 1.5rem;
+            }
+
+            .profile-info h1 {
+                font-size: 1.8rem;
+            }
+
+            .profile-avatar {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+            }
+
+            .tabs {
+                gap: 0;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+
+            .tab {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .profile-info h1 {
+                font-size: 1.5rem;
+            }
+
+            .profile-title {
+                font-size: 1rem;
+            }
+
+            .profile-meta {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .tabs {
+                gap: 0;
+                padding: 0;
+            }
+
+            .tab {
+                padding: 0.8rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .card h3 {
+                font-size: 1.2rem;
+            }
+
+            .skill-badge {
+                margin-right: 0;
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#home" class="navbar-brand">💼✨ FreelanceHub Pro</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#browse">Browse Jobs</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#messages">Messages</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- PROFILE HEADER -->
+        <div class="profile-header">
+            <div class="profile-avatar">👨‍💻</div>
+            <div class="profile-content">
+                <div class="profile-info">
+                    <h1>Rajesh Kumar</h1>
+                    <div class="profile-title">🚀 Full Stack Django Developer & Architect</div>
+                    <div class="profile-meta">
+                        <div class="meta-item">📍 Mumbai, India</div>
+                        <div class="profile-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-text">4.9 (48 verified reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn btn-primary">✏️ Edit Profile</button>
+                    <button class="btn btn-secondary">🔗 Share Profile</button>
+                    <button class="btn btn-secondary">💬 Contact Me</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABS CONTAINER -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('about', this)">📋 About</button>
+                <button class="tab" onclick="switchTab('portfolio', this)">💼 Portfolio</button>
+                <button class="tab" onclick="switchTab('experience', this)">🏢 Experience</button>
+                <button class="tab" onclick="switchTab('reviews', this)">⭐ Reviews</button>
+            </div>
+        </div>
+
+        <!-- ABOUT SECTION -->
+        <div id="about" class="tab-content active">
+            <!-- PROFESSIONAL OVERVIEW -->
+            <div class="card">
+                <h3>👨‍💼 Professional Overview</h3>
+                <p>
+                    Experienced Full Stack Django Developer with 3+ years of expertise building scalable web applications. Specialized in Django, Django REST Framework, PostgreSQL, and modern frontend technologies. Successfully delivered 24+ projects with a 95% client satisfaction rate and generating $15,240+ in monthly earnings.
+                </p>
+                <p>
+                    I focus on writing clean, maintainable code and delivering projects on time. My expertise includes RESTful API development, database optimization, payment gateway integration, responsive UI design with Bootstrap, and deploying applications on AWS. Proficient in agile methodologies and passionate about building user-centric solutions.
+                </p>
+            </div>
+
+            <!-- SKILLS & CERTIFICATIONS -->
+            <div class="card">
+                <h3>🎓 Skills & Technical Expertise</h3>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="margin-bottom: 1rem;">
+                        <div style="font-weight: 700; color: var(--dark); margin-bottom: 0.8rem;">Backend & Databases</div>
+                        <div>
+                            <span class="skill-badge">Python</span>
+                            <span class="skill-badge">Django</span>
+                            <span class="skill-badge">Django REST</span>
+                            <span class="skill-badge">PostgreSQL</span>
+                            <span class="skill-badge">MySQL</span>
+                            <span class="skill-badge">MongoDB</span>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="font-weight: 700; color: var(--dark); margin-bottom: 0.8rem;">Frontend & Design</div>
+                        <div>
+                            <span class="skill-badge">JavaScript ES6+</span>
+                            <span class="skill-badge">Bootstrap</span>
+                            <span class="skill-badge">HTML5</span>
+                            <span class="skill-badge">CSS3</span>
+                            <span class="skill-badge">Responsive Design</span>
+                            <span class="skill-badge">jQuery</span>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="font-weight: 700; color: var(--dark); margin-bottom: 0.8rem;">DevOps & Tools</div>
+                        <div>
+                            <span class="skill-badge">AWS</span>
+                            <span class="skill-badge">Docker</span>
+                            <span class="skill-badge">Git/GitHub</span>
+                            <span class="skill-badge">Linux</span>
+                            <span class="skill-badge">CI/CD</span>
+                            <span class="skill-badge">Redis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LANGUAGES & RATES -->
+            <div class="card">
+                <h3>💬 Languages & Pricing</h3>
+                <div class="grid-2">
+                    <div class="info-box">
+                        <div class="info-label">🗣️ English</div>
+                        <div style="color: var(--gray-600); margin-top: 0.5rem;">Professional Working Proficiency • Fluent in technical discussions</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">🇮🇳 Hindi</div>
+                        <div style="color: var(--gray-600); margin-top: 0.5rem;">Native Speaker • Full proficiency</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">⏱️ Hourly Rate</div>
+                        <div class="info-value" style="margin-top: 0.5rem;">$30 - $50/hr</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">💰 Project Rate</div>
+                        <div class="info-value" style="margin-top: 0.5rem;">From $500</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVAILABILITY -->
+            <div class="card">
+                <h3>📅 Availability & Response Time</h3>
+                <div class="grid-2">
+                    <div class="info-box">
+                        <div class="info-label">⚡ Response Time</div>
+                        <div style="color: var(--gray-600); margin-top: 0.5rem; font-weight: 600;">Usually within 2 hours</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">📊 Availability</div>
+                        <div style="color: var(--gray-600); margin-top: 0.5rem; font-weight: 600;">Full-time (40+ hrs/week)</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">🌍 Timezone</div>
+                        <div style="color: var(--gray-600); margin-top: 0.5rem; font-weight: 600;">IST (UTC +5:30)</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">✅ Member Since</div>
+                        <div style="color: var(--gray-600); margin-top: 0.5rem; font-weight: 600;">Jul 2021</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PORTFOLIO SECTION -->
+        <div id="portfolio" class="tab-content">
+            <div class="card">
+                <h3>💼 Featured Portfolio Projects (8 Total)</h3>
+                <div class="grid-2">
+                    <div class="portfolio-item">
+                        <div class="portfolio-title">Full-Stack Freelance Marketplace</div>
+                        <p class="portfolio-desc">Complete freelance platform with job posting, project bidding, secure payment integration using Stripe, real-time messaging, and comprehensive admin dashboard.</p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">Stripe</span>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-title">E-Commerce Platform</div>
+                        <p class="portfolio-desc">Complete e-commerce solution with product catalog, shopping cart, inventory management, order processing, payment gateway, and automated PDF invoice generation.</p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Stripe API</span>
+                            <span class="tech-tag">Celery</span>
+                            <span class="tech-tag">Bootstrap</span>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-title">Real-Time Chat Application</div>
+                        <p class="portfolio-desc">Real-time messaging platform with WebSocket support, user authentication, conversation management, file sharing, and notification system.</p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">Channels</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-title">Task Management System</div>
+                        <p class="portfolio-desc">Project management tool with task tracking, team collaboration, Kanban boards, progress analytics, email notifications, and role-based access control.</p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">jQuery</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-title">Restaurant Management System</div>
+                        <p class="portfolio-desc">Complete restaurant solution with menu management, order processing, delivery tracking, customer reviews, and financial reporting with analytics dashboard.</p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Google Maps API</span>
+                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">Chart.js</span>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                        <div class="portfolio-title">Learning Management System</div>
+                        <p class="portfolio-desc">Educational platform with course management, student enrollment, progress tracking, quiz system, certificate generation, and instructor dashboard.</p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">PDF Generation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPERIENCE SECTION -->
+        <div id="experience" class="tab-content">
+            <div class="card">
+                <h3>🏢 Professional Work Experience</h3>
+                
+                <div class="experience-item">
+                    <div class="experience-title">Senior Django Developer</div>
+                    <div class="experience-company">🏢 Tech Solutions Inc. (Remote)</div>
+                    <div class="experience-date">Jan 2022 - Present (2 years)</div>
+                    <div class="experience-desc">
+                        Led development of multiple Django projects, architected RESTful APIs, implemented database optimization strategies that improved query performance by 40%, and mentored junior developers. Technologies: Django, PostgreSQL, Redis, AWS.
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-title">Full Stack Developer (Freelance)</div>
+                    <div class="experience-company">💼 Self-Employed</div>
+                    <div class="experience-date">Jul 2021 - Present (3+ years)</div>
+                    <div class="experience-desc">
+                        Built 24+ custom web applications for diverse clients using Django, PostgreSQL, and Bootstrap. Managed end-to-end project delivery, client communication, and technical documentation. Maintained 95% client satisfaction rate.
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-title">Junior Web Developer</div>
+                    <div class="experience-company">🔧 Digital Agency</div>
+                    <div class="experience-date">Jan 2021 - Jun 2021 (6 months)</div>
+                    <div class="experience-desc">
+                        Assisted in development of 8+ client websites, implemented responsive designs using Bootstrap, maintained existing applications, and participated in code reviews. Technologies: Django, MySQL, JavaScript.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎓 Education & Certifications</h3>
+                
+                <div class="experience-item">
+                    <div class="experience-title">Bachelor of Science - Computer Science</div>
+                    <div class="experience-company">📚 Mumbai University</div>
+                    <div class="experience-date">2020 - 2023</div>
+                    <div class="experience-desc">
+                        Specialized in software development and database management. Graduated with First Class Honors (82% aggregate). Completed capstone project on e-commerce platform development.
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-title">AWS Certified Solutions Architect</div>
+                    <div class="experience-company">☁️ Amazon Web Services</div>
+                    <div class="experience-date">Certified - 2023</div>
+                    <div class="experience-desc">
+                        Certified in AWS architecture, cloud infrastructure design, and deployment strategies. Expertise in EC2, RDS, S3, and Lambda services.
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-title">Django Advanced Certification</div>
+                    <div class="experience-company">🎯 Udemy Professional Course</div>
+                    <div class="experience-date">Completed - 2021</div>
+                    <div class="experience-desc">
+                        Advanced Django course covering complex ORM queries, celery task queues, websockets, and production deployment. Completed 20+ hands-on projects.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REVIEWS SECTION -->
+        <div id="reviews" class="tab-content">
+            <div class="card">
+                <h3>⭐ Client Reviews & Testimonials (48 Total)</h3>
+                
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="review-author">John Smith</div>
+                        <span class="review-rating">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <div class="review-text">
+                        "Excellent work! Rajesh delivered a high-quality Django application exactly as specified. Very professional, responsive throughout the project, and added extra features without asking for more payment. Highly recommended!"
+                    </div>
+                    <div class="review-meta">
+                        <span>✅ Verified Client</span>
+                        <span>3 months ago</span>
+                        <span>Project: E-Commerce Platform ($2,500)</span>
+                    </div>
+                </div>
+
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="review-author">Sarah Johnson</div>
+                        <span class="review-rating">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <div class="review-text">
+                        "Great developer with strong Django and database optimization skills. Completed the REST API project ahead of schedule with excellent documentation and testing coverage. Truly professional!"
+                    </div>
+                    <div class="review-meta">
+                        <span>✅ Verified Client</span>
+                        <span>5 months ago</span>
+                        <span>Project: REST API Development ($1,800)</span>
+                    </div>
+                </div>
+
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="review-author">Tech Startup CEO</div>
+                        <span class="review-rating">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <div class="review-text">
+                        "Very satisfied with the e-commerce platform built. Good communication, excellent problem-solving skills, and great attention to detail. Would definitely hire again for future projects!"
+                    </div>
+                    <div class="review-meta">
+                        <span>✅ Verified Client</span>
+                        <span>8 months ago</span>
+                        <span>Project: E-Shop Development ($3,500)</span>
+                    </div>
+                </div>
+
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="review-author">Digital Agency Owner</div>
+                        <span class="review-rating">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <div class="review-text">
+                        "Rajesh is an outstanding developer. Delivered a complete freelance marketplace with all requested features. Code quality is excellent, documentation is comprehensive, and deployment was smooth."
+                    </div>
+                    <div class="review-meta">
+                        <span>✅ Verified Client</span>
+                        <span>6 months ago</span>
+                        <span>Project: Freelance Marketplace ($4,000)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>FreelanceHub Pro</h4>
+                <p style="color: #d1d5db; line-height: 1.8; font-size: 0.9rem;">Connect with talented freelancers and find opportunities worldwide. Build your career on FreelanceHub Pro.</p>
+            </div>
+            <div class="footer-section">
+                <h4>For Freelancers</h4>
+                <ul>
+                    <li><a href="#browse">Browse Jobs</a></li>
+                    <li><a href="#profile">My Profile</a></li>
+                    <li><a href="#proposals">My Proposals</a></li>
+                    <li><a href="#earnings">Earnings</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>For Clients</h4>
+                <ul>
+                    <li><a href="#post-job">Post Job</a></li>
+                    <li><a href="#find-talent">Find Talent</a></li>
+                    <li><a href="#portfolios">Browse Portfolios</a></li>
+                    <li><a href="#projects">My Projects</a></li>
+                    <li><a href="#team">Team Hiring</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#support">Support</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#trust">Trust & Safety</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FreelanceHub Pro. All rights reserved. | <a href="#privacy" style="color: #9ca3af;">Privacy Policy</a> | <a href="#terms" style="color: #9ca3af;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Tab switching functionality
+        function switchTab(tabName, btn) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // Show selected tab
+            const selectedTab = document.getElementById(tabName);
+            selectedTab.classList.add('active');
+            selectedTab.style.display = 'block';
+
+            // Add active class to clicked button
+            btn.classList.add('active');
+        }
+
+        // Smooth scroll for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Interactive elements
+        document.querySelectorAll('.skill-badge, .portfolio-item, .review-item').forEach(el => {
+            el.addEventListener('mouseover', function() {
+                this.style.opacity = '1';
+            });
+        });
+
+        // Page load animations
+        window.addEventListener('load', function() {
+            document.querySelectorAll('[class*="fade"]').forEach((el, index) => {
+                el.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+    </script>
+</body>
+</html>
